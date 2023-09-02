@@ -1,0 +1,22 @@
+body{
+    background: #48a3f8;
+}
+
+#side_nav{
+    background: #0400ff;
+    min-width: 250px;
+    min-height: 250px;
+}
+
+.content{
+    min-height: 100vh;
+    width: 100%;
+}
+
+hr.h-color{
+    background: #48a3f8;
+}
+
+footer{
+    background: #3d3a3a;
+}

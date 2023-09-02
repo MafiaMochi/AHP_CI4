@@ -1,0 +1,246 @@
+<?php for ($i = 0; $i <  $count * $count; $i++) : ?>
+    <tr name="all[<?= $i; ?>]" class="text-center">
+        <td style="width: 25%;">
+            <select name="id_kriteria1[<?= $i; ?>]" class="form-select" aria-label="Default select example">
+                <?php foreach ($kriteria as $krit) : ?>
+                    <option value="<?= $krit["id_krit"]; ?>"><?= $krit['nama']; ?></option>
+                <?php endforeach; ?>
+            </select>
+        </td>
+        <td style="width: 25%;">
+            <select name="id_kriteria2[<?= $i; ?>]" class="form-select" aria-label="Default select example">
+                <?php foreach ($kriteria as $krit) : ?>
+                    <option value="<?= $krit["id_krit"]; ?>"><?= $krit['nama']; ?></option>
+                <?php endforeach; ?>
+            </select>
+        </td>
+        <td><input type="text" class="form-control" id="nilai_perb[<?= $i; ?>]" name="nilai_perb[<?= $i; ?>]" aria-describedby="text"></td>
+    </tr>
+<?php endfor; ?>
+
+<tr name="all" class="text-center">
+    <td style="width: 25%;">
+        <select name="id_kriteria1" class="form-select" aria-label="Default select example">
+            <?php foreach ($kriteria as $krit) : ?>
+                <option value="<?= $krit["id_krit"]; ?>"><?= $krit['nama']; ?></option>
+            <?php endforeach; ?>
+        </select>
+    </td>
+    <td style="width: 25%;">
+        <select name="id_kriteria2" class="form-select" aria-label="Default select example">
+            <?php foreach ($kriteria as $krit) : ?>
+                <option value="<?= $krit["id_krit"]; ?>"><?= $krit['nama']; ?></option>
+            <?php endforeach; ?>
+        </select>
+    </td>
+    <td><input type="text" class="form-control" id="nilai_preb" name="nilai_preb" aria-describedby="text"></td>
+</tr>
+
+pebanduingan alternatif
+<form action="" method="post">
+    <?= csrf_field(); ?>
+    <table class="table table-bordered border-dark bg-white">
+        <tr class="text-center">
+            <td>alternatif Utama</td>
+            <td>alternatif pembanding</td>
+            <td>nilai alternatif</td>
+        </tr>
+        <?php for ($i = 0; $i <  $countalt * $countalt; $i++) : ?>
+            <tr name="all[<?= $i; ?>]" class="text-center">
+                <td>
+                    <select name="id_guru1[]" class="form-select" aria-label="Default select example">
+                        <?php foreach ($alternatif as $alt) : ?>
+                            <option value="<?= $alt["id_guru"]; ?>"><?= $alt['id_guru']; ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </td>
+                <td>
+                    <select name="id_guru2[]" class="form-select" aria-label="Default select example">
+                        <?php foreach ($alternatif as $alt) : ?>
+                            <option value="<?= $alt["id_guru"]; ?>"><?= $alt['id_guru']; ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </td>
+                <td><input type="text" class="form-control" id="nilai_alt[<?= $i; ?>]" name="nilai_alt[]" aria-describedby="text"></td>
+            </tr>
+        <?php endfor; ?>
+    </table>
+    <button type="submit" class="btn btn-primary">Masukan</button>
+</form>
+
+<table class="table table-bordered border-dark bg-white">
+    <tr>
+        <td style="width: 25%;"></td>
+        <?php foreach ($alternatif as $alt) : ?>
+            <td style="width: 25%;"><?= $alt['id_guru']; ?></td>
+        <?php endforeach; ?>
+    </tr>
+    <tr class="d-none">
+        <td></td>
+    </tr>
+    <tr>
+        <td>Rata-rata</td>
+        <?php foreach ($alternatif as $alt) : ?>
+            <td style="width: 25%;">nilai</td>
+        <?php endforeach; ?>
+    </tr>
+</table>
+<button type="submit" class="btn btn-primary">Masukan</button>
+
+<!-- contoh kode HTML dengan satu select box di luar loop dan satu select box di dalam loop for -->
+<select class="form-select select1" id="select1" name="select1">
+    <option value="">Pilih Kriteria</option>
+    <?php foreach ($kriteria as $krit) : ?>
+        <option value="<?= $krit['id_krit'] ?>"><?= $krit['nama'] ?></option>
+    <?php endforeach; ?>
+</select>
+
+
+
+<?php foreach ($kriteria as $krit) : ?>
+    <div class="card">
+        <h3 class="mx-3">Rata-rata <?= $krit['nama']; ?></h3>
+        <div class="card-body">
+            <table class="table table-bordered border-dark bg-white">
+                <tr>
+                    <td style="width: 25%;"></td>
+                    <?php foreach ($alternatif as $alt) : ?>
+                        <td style="width: 25%;"><?= $alt['id_guru']; ?></td>
+                    <?php endforeach; ?>
+                </tr>
+                <tr>
+                    <td><?= $krit['nama']; ?></td>
+                    <?php foreach ($perbalt as $alt) : ?>
+                        <td style="width: 25%;"><?= $alt->rata_alt; ?></td>
+                    <?php endforeach; ?>
+                </tr>
+            </table>
+            <button type="submit" class="btn btn-primary">Masukan</button>
+        </div>
+    </div>
+<?php endforeach; ?>
+
+
+//rata-rata terabaru ranking
+<form action="/alternatifcontroller/saveRata" method="post">
+    <?= csrf_field(); ?>
+    <?php foreach ($alternatif as $al) : ?>
+        <div class="card">
+            <h3 class="mx-3">Rata-rata <?= $al['nama_gr']; ?></h3>
+            <div class="card-body">
+                <table class="table table-bordered border-dark bg-white">
+                    <thead>
+                        <tr>
+                            <th style="width: 25%;"></th>
+                            <?php foreach ($kriteria as $kr) : ?>
+                                <th style="width: 25%;"><?= $kr['nama']; ?></th>
+                            <?php endforeach; ?>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="d-none">
+                            <td></td>
+                            <?php foreach ($kriteria as $kr) : ?>
+                                <th style="width: 25%;">
+                                    <input type="text" readonly value="<?= $kr['id_krit']; ?>" class="form-control" name=" id_kriteria[]" aria-describedby="text">
+                                </th>
+                            <?php endforeach; ?>
+                        </tr>
+                        <tr>
+                            <td class="d-none"><input type="text" readonly value="<?= $al['id_guru']; ?>" class="form-control" name=" id_alt[]" aria-describedby="text"></td>
+                            <td><input type="text" readonly value="<?= $al['nama_gr']; ?>" class="form-control" name=" nama_alt[]" aria-describedby="text"></td>
+
+                            <?php foreach ($kriteria as $alt) : ?>
+                                <?php
+                                $total_nilai_kriteria = 0;
+                                foreach ($perbalt as $pb) {
+                                    if ($pb->id_alt2 == $al['id_guru'] && $pb->id_kriteria == $alt['id_krit']) {
+                                        $total_nilai_kriteria += $pb->total;
+                                    }
+                                }
+                                ?>
+                                <td style="width: 25%;">
+                                    <input type="text" readonly value="<?= $total_nilai_kriteria; ?>" class="form-control" id="<?= $total_nilai_kriteria; ?>" name=" rata_alt[][]" aria-describedby="text">
+                                </td>
+                            <?php endforeach; ?>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    <?php endforeach; ?>
+    <button type="submit" class="btn btn-primary">Masukan</button>
+</form>
+
+<?php foreach ($alternatif as $al) : ?>
+    <div class="card">
+        <h3 class="mx-3">Rata-rata <?= $al['nama_gr']; ?></h3>
+        <div class="card-body">
+            <table class="table table-bordered border-dark bg-white">
+                <thead>
+                    <tr>
+                        <th style="width: 25%;"></th>
+                        <?php foreach ($kriteria as $kr) : ?>
+                            <th style="width: 25%;"><?= $kr['nama']; ?></th>
+                        <?php endforeach; ?>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="d-none">
+                        <td></td>
+                        <?php foreach ($alternatif as $alt) : ?>
+                            <th style="width: 25%;">
+                                <input type="text" readonly value="<?= $alt['nama_gr']; ?>" class="form-control" name=" nama_alt[]" aria-describedby="text">
+                            </th>
+                        <?php endforeach; ?>
+                    </tr>
+                    <tr>
+                        <td><?= $al['nama_gr']; ?></td>
+                        <?php foreach ($kriteria as $alt) : ?>
+                            <?php
+                            $total_rata_kriteria = 0;
+                            $nilai_kriteria = 0;
+                            $jumlah_data = 0;
+                            foreach ($perbalt as $pb) {
+                                if ($pb->id_alt2 == $al['id_guru'] && $pb->id_kriteria == $alt['id_krit']) {
+                                    $nilai_kriteria += $pb->rata_alt;
+                                    $jumlah_data++;
+                                }
+                            }
+                            if ($jumlah_data > 0) {
+                                $rata_kriteria = $nilai_kriteria / $jumlah_data;
+                            } else {
+                                $rata_kriteria = "-";
+                            }
+                            ?>
+                            <td style="width: 25%;">
+                                <input type="text" readonly value="<?= $rata_kriteria; ?>" class="form-control" id="<?= $rata_kriteria; ?>" name=" rata_alt[][]" aria-describedby="text">
+                            </td>
+                        <?php endforeach; ?>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+<?php endforeach; ?>
+
+saya memiliki database dengan isi kolom satu[c1,c1,c1,c1,c1,c1,c1,c1,c1,] dan kolom kedua[a1,a1,a1,a2,a2,a2,a3,a3,a3] dan kolom ketiga[a1,a2,a3,a1,a2,a3,a1,a2,a3] dan kolom ke 4 nilai saya ingini melakukan perhitungan rata-rata kolom ke 4 beredasarkan nilai kolom satu dan nilai kolom ketiga serta saat saya ingin menjumlahkan nilai rata-rata yang saya daptkan berdasarkan nilai kolom ketiga. dan saya ingin menampilkannya kedalam view berdasarkan nilai kolom ke tiga. buatkan dal;am ci4 model, contorller, dan view
+
+save rata
+public function saveRata()
+{
+$id_kriteria = $this->request->getPost('id_kriteria');
+$id_alt = $this->request->getPost('id_alt');
+$nama_alt = $this->request->getPost('nama_alt');
+$rata_alt = $this->request->getPost('rata_alt');
+
+for ($i = 0; $i < count($id_alt); $i++) { for ($j=0; $j < count($rata_alt[$i]); $j++) { $data=[ 'id_kriteria'=> $id_kriteria[$j],
+    'id_alt' => $id_alt[$i],
+    'nama_alt' => $nama_alt[$i],
+    'nilai_rengking' => $rata_alt[$i][$j]
+    ];
+    $this->rankingModel->masuk($data);
+    }
+    }
+    return redirect()->to('/alternatifcontroller/perbandinganalternatif')->with('sukses', 'data berhasil disimpan');
+    }

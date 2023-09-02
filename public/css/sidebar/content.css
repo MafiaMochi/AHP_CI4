@@ -1,0 +1,6 @@
+#content {
+    width: 100%;
+    min-height: 100vh;
+    transition: all 0.3s;
+    background-color: rgb(255, 255, 255);
+}

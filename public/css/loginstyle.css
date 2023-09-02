@@ -1,0 +1,84 @@
+@import "https://fonts.googleapis.com/css?family=Oswald:300,400,500,600,700";
+/* @font-face {
+    font-family: 'Oswald-Regular';
+    src: url('../fonts/Oswald/Oswald-Regular.ttf') format('truetype');
+  } */
+
+body{
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-family: 'Oswald',sans-serif;
+    background-image: url(../img/bg.jpg);
+    background-color: #2980b9;
+
+}
+
+.main{
+    width: 350px;
+    height: 500px;
+    background: red;
+    overflow: hidden;
+    background: url(../img/paper.jpg) no-repeat center / cover;
+    border-radius: 10px;
+    box-shadow: 5px 20px 50px #000;
+    
+}
+
+label{
+    color: #000;
+    font-size: 2.3em;
+    justify-content: center;
+    display: flex;
+    margin: 50px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: .5s ease-in-out;
+}
+
+
+input{
+    width: 60%;
+    height: 20%;
+    background: #e0dede;
+    justify-content: center;
+    display: flex;
+    margin: 20px auto;
+    padding: 10px;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+}
+
+.select{
+    border: none;
+    justify-content: center;
+    display: block;
+    margin: 10px auto;
+    appearance: none;
+    width: 50%;
+    color: #000;
+    background-color: #d1cbcb;
+    font-size: 20px;
+}
+
+button{
+    width: 80px;
+    height: 40px;
+    margin: 10px auto;
+    justify-content: center;
+    display: block;
+    color: #fff;
+    background: #886c4c;
+    font-size: 1em;
+    font-weight: bold;
+    margin-top: 20px;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    transition: .2s ease-in;
+    cursor: pointer;
+}
